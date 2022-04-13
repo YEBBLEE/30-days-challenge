@@ -1,38 +1,50 @@
-.App {
-  text-align: center;
+body {
+  background-color: var(--color-black);
+  overflow-y: hidden;
+}
+.challenges {
+  width: 33vw;
+  height: 70vh;
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: var(--color-dark-gray);
+  overflow-x: hidden;
+  overflow-y:scroll;
+  padding: 0;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.challenges li {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
+  list-style: none;
+  background-color: var(--color-black);
+  width: 360px;
+  height: 360px;
+  color: var(--color-white);
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: var(--box-radius);
 }
-
-.App-link {
-  color: #61dafb;
+.top-box {
+  display: flex;
+  justify-content: space-between;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mid-box {
+  width: 200px;
+  height: 200px;
+}
+.bottom-box {
+  display: flex;
+  justify-content: space-between;
+}
+.day-info p {
+  margin: 0;
+}
+.progress-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-dark-gray);
 }

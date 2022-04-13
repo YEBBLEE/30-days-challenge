@@ -1,9 +1,13 @@
-import './app.css';
+import React, { Component } from 'react';
+import Challenges from './components/challenges';
+import '@fortawesome/fontawesome-free/js/all.js';
 
-function App() {
-  return (
-    <h1>Hello :)</h1>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Challenges/>
+    );
+  }
 }
 
 export default App;
