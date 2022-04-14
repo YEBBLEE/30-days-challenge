@@ -1,0 +1,29 @@
+.navbar {
+    width: 33vw;
+    color: var(--color-white);
+    margin: auto;
+    font-family: sans-serif;
+}
+.navbar-title {
+    font-size: 1.75rem;
+    text-align: center;
+    color: var(--color-light-blue);
+}
+.count-box {
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+.navbar-txt {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+.navbar-countNumber {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-left: 10px;
+    color: var(--color-dark-pink);
+    text-shadow: 1px 1px 1px var(--color-light-blue),
+                2px 2px 1px var(--color-light-blue);
+}
