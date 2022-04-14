@@ -1,6 +1,38 @@
 body {
   background-color: var(--color-black);
-  overflow-y: hidden;
+}
+body::-webkit-scrollbar {
+  width: 2px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-light-blue);
+  border-radius: 10px;
+  background-clip: padding-box;
+}
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.challenge-form {
+  width: 33vw;
+  margin: auto;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-family: sans-serif;
+
+}
+.challenge-input {
+  width: 75%;
+  line-height: 3rem;  
+  background-color: var(--color-dark-gray);
+  border: none;
+}
+.challenge-btn {
+  width: 20%;
+  background-color: var(--color-dark-gray);
+  border: 1px solid var(--color-light-blue);
+  color: var(--color-light-blue);
 }
 .challenges {
   width: 33vw;
@@ -29,12 +61,12 @@ body {
   justify-content: space-around;
   list-style: none;
   background-color: var(--color-black);
-  width: 360px;
-  height: 360px;
+  width: 24vw;
+  height: 24vw;
   color: var(--color-white);
   padding: 30px;
   margin: 40px auto;
-  border-radius: var(--box-radius);
+  border-radius: 4px;
 }
 .top-box {
   display: flex;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Challenge from './challenge';
+import InputForm from './inputForm';
 
 class Challenges extends Component {
     
@@ -88,14 +89,18 @@ class Challenges extends Component {
 
     render() {
         return (
-            <ul className='challenges'>
-                {this.state.challenges.map(challenge => 
-                    <Challenge
-                        key={challenge.id}
-                        challenge={challenge}
-                    />
-                )}
-            </ul>
+            <>
+                <InputForm/>
+                <ul className='challenges'>
+                    {this.state.challenges.map(challenge => 
+                        <Challenge
+                            key={challenge.id}
+                            challenge={challenge}
+                        />
+                    )}
+                </ul>
+            </>
+            
         );
     }
 }
