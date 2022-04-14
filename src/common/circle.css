@@ -1,10 +1,13 @@
 .CircularProgressbar .CircularProgressbar-path {
     stroke: var(--color-light-blue);
+    stroke-linecap: square;
 }
 .CircularProgressbar .CircularProgressbar-trail {
     stroke: var(--color-dark-gray);
 }
 .CircularProgressbar .CircularProgressbar-text {
     fill: var(--color-light-blue);
-    font-size: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
+    transform: translateY(5px);
 }

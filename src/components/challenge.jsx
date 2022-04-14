@@ -11,39 +11,34 @@ class Challenge extends Component {
         const {title,days,startDate,endDate,isProgress} = this.props.challenge;
         const count = days.filter(day => day.isChecked).length;
         const ratio = (count/days.length)*100;
-        const barStyle = {
-            color: '#41F1FE'
-        };
-
-        console.log(ratio);
 
         return (
             <li className='challenge'>
                 <div className="top-box">
-                    <span className="challenge-title">{title}</span>
+                    <input type="text" className="challenge-title" defaultValue={title} disabled></input>
                     <div>
                         <button className='challenge-button'>
-                            <i className="fa-solid fa-pen-to-square"></i>
+                            <i className="fa-solid fa-pen-to-square edit-btn"></i>
                         </button>
                         <button className='challenge-button'>
-                            <i className="fa-solid fa-trash-can"></i>
+                            <i className="fa-solid fa-trash-can delete-btn"></i>
                         </button>
                     </div>
                 </div>
                 <div className="mid-box">
                     {days.map(day => 
-                        <button key={day.number}>
+                        <p key={day.number}>
                             {day.number}
-                        </button>    
+                        </p>    
                     )}
                 </div>
                 <div className="bottom-box">
+                    <div className="progress-circle">
+                        <CircularProgressbar value={ratio} text={count}/>
+                    </div>
                     <div className="day-info">
                         <p>Start : {startDate}</p>
                         <p>End : {endDate}</p>
-                    </div>
-                    <div className="progress-circle">
-                        <CircularProgressbar value={ratio} text={count} styles={barStyle}/>
                     </div>
                 </div>
             </li>
