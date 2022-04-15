@@ -23,7 +23,7 @@
     font-weight: bold;
     font-size: 2rem;
     margin-left: 10px;
-    color: var(--color-dark-pink);
-    text-shadow: 1px 1px 1px var(--color-light-blue),
-                2px 2px 1px var(--color-light-blue);
+    color: var(--color-light-blue);
+    text-shadow: 1px 1px 1px var(--color-light-gray),
+                2px 2px 1px var(--color-light-gray);
 }
