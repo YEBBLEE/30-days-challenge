@@ -8,7 +8,7 @@ class Navbar extends Component {
                 <h1 className='navbar-title'>30 DAYS CHALLANGE</h1>
                 <div className='count-box'>
                     <span className='navbar-txt'>in progress : </span>
-                    <span className='navbar-countNumber'>3</span>
+                    <span className='navbar-countNumber'>{this.props.countNumber}</span>
                 </div>
             </nav>
         );
