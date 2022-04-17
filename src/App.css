@@ -104,6 +104,11 @@ body::-webkit-scrollbar-track {
 }
 .mid-box p {
   text-align: center;
+  cursor: pointer;
+}
+.number-through {
+  text-decoration: line-through;
+  color: var(--color-light-blue);
 }
 .bottom-box {
   display: flex;

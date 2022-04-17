@@ -3,6 +3,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
 import '../common/circle.css';
+import ChallengeNum from './challengeNum';
 
 class Challenge extends Component {
     titleRef = React.createRef();
@@ -22,13 +23,18 @@ class Challenge extends Component {
     
     handleModify = () => {
         console.log('체크아이콘 클릭!');
+        this.setState({disabled : !this.state.disabled});
         const titleInput = this.titleRef.current.value;
         titleInput && this.props.onModify(titleInput,this.props.challenge);
     }
 
+    handleNumber = (challenge,day,isClicked) => {
+        this.props.onNumberClicked(challenge,day,isClicked);
+    }
+
     render() {
         console.log(this.props);
-        const {title,days,startDate,endDate,isProgress} = this.props.challenge;
+        const {title,days,startDate,endDate} = this.props.challenge;
         const count = days.filter(day => day.isChecked).length;
         const ratio = (count/days.length)*100;
 
@@ -50,26 +56,33 @@ class Challenge extends Component {
                                 <i className="fa-solid fa-check modify-btn"></i>
                             </button>:''
                         }
-                        <button 
-                            className='challenge-button'
-                            onClick={this.handleEdit}>
-                            <i className="fa-solid fa-pen-to-square edit-btn"></i>
-                        </button>
                         {this.state.disabled ?
-                            <button 
-                                className='challenge-button'
-                                onClick={this.handleDelete}>
-                                <i className="fa-solid fa-trash-can delete-btn"></i>
-                            </button> : ''
+                            <>
+                                <button 
+                                    className='challenge-button'
+                                    onClick={this.handleEdit}>
+                                    <i className="fa-solid fa-pen-to-square edit-btn"></i>
+                                </button>
+                                <button 
+                                    className='challenge-button'
+                                    onClick={this.handleDelete}>
+                                    <i className="fa-solid fa-trash-can delete-btn"></i>
+                                </button>
+                            </>
+                            : ''
                         }
                     </div>
                 </div>
                 <div className="mid-box">
-                    {days.map(day => 
-                        <p key={day.number} value={day.isChecked}>
-                            {day.number}
-                        </p>    
-                    )}
+                    {
+                        days.map( day => 
+                            <ChallengeNum key={day.number} 
+                            day={day}
+                            challenge={this.props.challenge}
+                            onNumberClicked={this.handleNumber}
+                            />
+                        )
+                    }
                 </div>
                 <div className="bottom-box">
                     <div className="progress-circle">

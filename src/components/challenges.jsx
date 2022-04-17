@@ -15,6 +15,10 @@ class Challenges extends Component {
         this.props.onModify(title,challenge);
     }
     
+    handleNumber = (challenge,day,isClicked) => {
+        this.props.onNumberClicked(challenge,day,isClicked);
+    }
+
     render() {
         return (
             <>
@@ -28,6 +32,7 @@ class Challenges extends Component {
                             challenge={challenge}
                             onDelete={this.handleDelete}
                             onModify={this.handleModify}
+                            onNumberClicked={this.handleNumber}
                         />
                     )}
                 </ul>
