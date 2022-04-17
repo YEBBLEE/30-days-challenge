@@ -85,9 +85,15 @@ class Challenge extends Component {
                     }
                 </div>
                 <div className="bottom-box">
-                    <div className="progress-circle">
-                        <CircularProgressbar value={ratio} text={count}/>
-                    </div>
+                    {
+                        ratio !== 0 ?
+                        <div className="progress-circle">
+                            <CircularProgressbar value={ratio} text={count}/>
+                        </div> :
+                        <div className="progress-circle">
+                            <p className='progress-zero'>{count}</p>
+                        </div>
+                    }
                     <div className="day-info">
                         <p>Start : {startDate}</p>
                         <p>End : {endDate}</p>

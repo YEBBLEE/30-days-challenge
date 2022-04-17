@@ -27,6 +27,7 @@ body::-webkit-scrollbar-track {
   line-height: 3rem;  
   background-color: var(--color-dark-gray);
   border: none;
+  color: var(--color-white);
 }
 .challenge-btn {
   width: 20%;
@@ -124,4 +125,12 @@ body::-webkit-scrollbar-track {
   height: 50px;
   border-radius: 50%;
   background-color: var(--color-dark-gray);
+}
+.progress-zero {
+  color: var(--color-light-gray);
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+  margin: 0;
 }
