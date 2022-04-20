@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Challenge from './challenge';
-import InputForm from './inputForm';
+import Challenge from './Challenge';
+import InputForm from './InputForm';
 
 class Challenges extends Component {
     handleStart = (title) => {

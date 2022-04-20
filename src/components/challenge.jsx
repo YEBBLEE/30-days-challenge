@@ -3,7 +3,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
 import '../common/circle.css';
-import ChallengeNum from './challengeNum';
+import ChallengeNum from './ChallengeNum';
 
 class Challenge extends Component {
     titleRef = React.createRef();

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Challenges from './components/challenges';
 import '@fortawesome/fontawesome-free/js/all.js';
-import Navbar from './components/navbar';
+import Challenges from './components/Challenges';
+import Navbar from './components/Navbar';
 
 class App extends Component {
   
@@ -24,7 +24,7 @@ class App extends Component {
         {number:8 , isChecked: false},
         {number:9 , isChecked: false},
         {number:10 , isChecked: false},
-        {number:11, isChecked: false},
+        {number:11 , isChecked: false},
         {number:12 , isChecked: false},
         {number:13 , isChecked: false},
         {number:14 , isChecked: false},
