@@ -10,7 +10,7 @@ class ChallengeNum extends Component {
         const {number,isChecked} = this.props.day;
         return (
             <div onClick={this.handleNumber}>
-                <p ref={this.numRef} 
+                <p
                     className={isChecked? 'number-through':''}>
                     {number}
                 </p>
