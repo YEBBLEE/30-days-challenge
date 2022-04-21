@@ -28,8 +28,8 @@ class Challenge extends Component {
         titleInput && this.props.onModify(titleInput,this.props.challenge);
     }
 
-    handleNumber = (challenge,day,isClicked) => {
-        this.props.onNumberClicked(challenge,day,isClicked);
+    handleNumber = (challenge,days,isClicked,number) => {
+        this.props.onNumberClicked(challenge,days,isClicked,number);
     }
 
     render() {

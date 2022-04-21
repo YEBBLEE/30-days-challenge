@@ -134,18 +134,36 @@ class App extends Component {
       .catch(error => console.log('error', error));
   }
 
-  handleNumber = (challenge,day,isChecked) => {
-    let dayList = challenge.days.days;
+  handleNumber = (challenge,days,isChecked,number) => {
+    const daysId = days.id;
 
-    const modifiedDay = {...day,isChecked:isChecked};
-    
-    dayList.splice(dayList.indexOf(day),1,modifiedDay);
-    
-    let challenges = [...this.state.challenges];
-    const chIdx = challenges.indexOf(challenge);
-    challenge.days.days = dayList;
-    challenges.splice(chIdx,1,challenge);
-    this.setState({challenges});
+    const reqOptions = {
+      method: 'PUT',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body : JSON.stringify({number,isChecked})
+    };
+
+    fetch(`http://localhost:8080/challenges/days/${daysId}`, reqOptions)
+      .then(res => {
+        let result = res.json();
+        if(res.status > 299 || res.status < 200) {
+          const msg = result && result.message ? result.message : 'Something Wrong!';
+          const error = new Error(msg);
+          throw error;
+        }
+        return result;
+      })
+      .then((result) => {
+        let challenges = [...this.state.challenges];
+        const chIdx = challenges.indexOf(challenge);
+        const modifiedChallenge = result;
+        challenges.splice(chIdx,1,modifiedChallenge);
+        this.setState({challenges});
+      })
+      .catch(error => console.log('error', error));
   }
 
   setEndDate = () => {

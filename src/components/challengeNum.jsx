@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 class ChallengeNum extends Component {
 
     handleNumber = () => {
-        this.props.onNumberClicked(this.props.challenge,this.props.day,!this.props.day.isChecked);
+        this.props
+        .onNumberClicked(this.props.challenge,
+            this.props.challenge.days,
+            !this.props.day.isChecked,
+            this.props.day.number);
     }
 
     render() {
