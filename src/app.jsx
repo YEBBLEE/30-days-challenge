@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '@fortawesome/fontawesome-free/js/all.js';
 import Challenges from './components/Challenges';
 import Navbar from './components/Navbar';
+import Login from './components/Login';
+import './common/colors.css';
 
 class App extends Component {
   
