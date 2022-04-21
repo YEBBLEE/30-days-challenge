@@ -107,9 +107,31 @@ class App extends Component {
   }
 
   handleDelete = (challenge) => {
-    let deleteId = challenge.id;
-    const challenges = this.state.challenges.filter(challenge => challenge.id !== deleteId );
-    this.setState({challenges});
+    const challengeId = challenge.id;
+
+    const reqOptions = {
+      method: 'DELETE',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    fetch(`http://localhost:8080/challenges/${challengeId}`, reqOptions)
+      .then(res => {
+        let result;
+        if(res.status > 299 || res.status < 200) {
+          const msg = result && result.message ? result.message : 'Something Wrong!';
+          const error = new Error(msg);
+          throw error;
+        }
+        return result;
+      })
+      .then(() => {
+        const challenges = this.state.challenges.filter(challenge => challenge.id !== challengeId );
+        this.setState({challenges});
+      })
+      .catch(error => console.log('error', error));
   }
 
   handleNumber = (challenge,day,isChecked) => {
