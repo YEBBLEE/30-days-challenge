@@ -13,7 +13,7 @@ class App extends Component {
     const nickname = 'YEBIN';
     const query = nickname ? `?nickname=${nickname}` : '';
     
-    var reqOptions = {
+    const reqOptions = {
       method: 'GET',
       redirect: 'follow',
       headers: {
@@ -44,52 +44,33 @@ class App extends Component {
   }
 
   handleStart = (title) => {
-    const challenge = {
-      id:Date.now().toString(),
-      title,
-      days: {
-        id: Date.now().toString(),
-        days: [
-          {number:1 , isChecked: false},
-          {number:2 , isChecked: false},
-          {number:3 , isChecked: false},
-          {number:4 , isChecked: false},
-          {number:5 , isChecked: false},
-          {number:6 , isChecked: false},
-          {number:7 , isChecked: false},
-          {number:8 , isChecked: false},
-          {number:9 , isChecked: false},
-          {number:10 , isChecked: false},
-          {number:11 , isChecked: false},
-          {number:12 , isChecked: false},
-          {number:13 , isChecked: false},
-          {number:14 , isChecked: false},
-          {number:15 , isChecked: false},
-          {number:16 , isChecked: false},
-          {number:17 , isChecked: false},
-          {number:18 , isChecked: false},
-          {number:19 , isChecked: false},
-          {number:20 , isChecked: false},
-          {number:21 , isChecked: false},
-          {number:22 , isChecked: false},
-          {number:23 , isChecked: false},
-          {number:24 , isChecked: false},
-          {number:25 , isChecked: false},
-          {number:26 , isChecked: false},
-          {number:27 , isChecked: false},
-          {number:28 , isChecked: false},
-          {number:29 , isChecked: false},
-          {number:30 , isChecked: false},
-        ]
+
+    const reqOptions = {
+      method: 'POST',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'application/json'
       },
-      startDate: new Date().toLocaleDateString(),
-      endDate: this.setEndDate(),
-      createdAt: new Date(),
-      isProgress: true,
-      nickname: 'YEBIN'
+      body: JSON.stringify({title,nickname:'YEBIN'})
     };
-    const challenges = [challenge, ...this.state.challenges];
-    this.setState({challenges});
+
+    fetch(`http://localhost:8080/challenges`, reqOptions)
+      .then(res => {
+        const result = res.json();
+        if(res.status > 299 || res.status < 200) {
+          const msg = result && result.message ? result.message : 'Something Wrong!';
+          const error = new Error(msg);
+
+          throw error;
+        }
+        return result
+      })
+      .then((result) => {
+        const challenge = result;
+        const challenges = [challenge, ...this.state.challenges];
+        this.setState({challenges});
+      })
+      .catch(error => console.log('error', error));
   }
   
   handleModify = (title,challenge) => {
