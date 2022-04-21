@@ -33,10 +33,10 @@ class Challenge extends Component {
     }
 
     render() {
-        console.log(this.props);
         const {title,days,startDate,endDate} = this.props.challenge;
-        const count = days.filter(day => day.isChecked).length;
-        const ratio = (count/days.length)*100;
+        const dayList = days.days;
+        const count = dayList.filter(day => day.isChecked).length;
+        const ratio = (count/dayList.length)*100;
 
         return (
             <li className='challenge'>
@@ -75,7 +75,7 @@ class Challenge extends Component {
                 </div>
                 <div className="mid-box">
                     {
-                        days.map( day => 
+                        dayList.map( day => 
                             <ChallengeNum key={day.number} 
                             day={day}
                             challenge={this.props.challenge}
