@@ -74,10 +74,36 @@ class App extends Component {
   }
   
   handleModify = (title,challenge) => {
-    const modified = {...challenge,title:title};
-    let challenges = [...this.state.challenges];
-    challenges.splice(challenges.indexOf(challenge),1,modified);
-    this.setState({challenges});
+
+    const challengeId = challenge.id;
+
+    const reqOptions = {
+      method: 'PUT',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({title,nickname:'YEBIN'})
+    };
+
+    fetch(`http://localhost:8080/challenges/${challengeId}`, reqOptions)
+      .then(res => {
+        const result = res.json();
+        if(res.status > 299 || res.status < 200) {
+          const msg = result && result.message ? result.message : 'Something Wrong!';
+          const error = new Error(msg);
+
+          throw error;
+        }
+        return result
+      })
+      .then((result) => {
+        const modified = result;
+        let challenges = [...this.state.challenges];
+        challenges.splice(challenges.indexOf(challenge),1,modified);
+        this.setState({challenges});
+      })
+      .catch(error => console.log('error', error));
   }
 
   handleDelete = (challenge) => {
