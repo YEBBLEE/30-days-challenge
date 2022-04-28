@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../navbar.css';
 
-class Navbar extends Component {
+class ProgressCount extends Component {
     render() {
         return (
             <nav className='navbar'>
@@ -15,4 +15,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default ProgressCount;
