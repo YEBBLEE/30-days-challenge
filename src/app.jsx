@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import '@fortawesome/fontawesome-free/js/all.js';
 import Challenges from './components/Challenges';
-import Navbar from './components/Navbar';
 import Login from './components/Login';
 import './common/colors.css';
+import {
+  BrowserRouter  as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import ProgressCount from './components/ProgressCount';
+import Navbar from './components/Navbar';
 
 class App extends Component {
   
@@ -176,19 +182,26 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <Navbar 
-          countNumber={this.state.challenges.filter(challenge => challenge.isProgress).length}
-        />
-        <Challenges
-          challenges={this.state.challenges}
-          onStart={this.handleStart}
-          onDelete={this.handleDelete}
-          onModify={this.handleModify}
-          onNumberClicked={this.handleNumber}
-        />
-      </>
-      
+      <Router>
+        <Navbar/>
+        <Switch>
+          <Route path="/login">
+            <Login/>
+          </Route>
+          <Route path="/challenges">
+              <ProgressCount 
+                countNumber={this.state.challenges.filter(challenge => challenge.isProgress).length}
+              />
+              <Challenges
+              challenges={this.state.challenges}
+              onStart={this.handleStart}
+              onDelete={this.handleDelete}
+              onModify={this.handleModify}
+              onNumberClicked={this.handleNumber}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }
