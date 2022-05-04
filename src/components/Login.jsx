@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import Logo from './Logo';
 import '../css/Login.css';
 
-const Login = (props) => {
+export function Login({http}) {
     const [signup, setSignup] = useState(false);
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
@@ -19,60 +19,22 @@ const Login = (props) => {
             //회원가입 요청
             const reqOptions = {
                 method: 'POST',
-                redirect: 'follow',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 body: JSON.stringify({nickname, password, email, url})
             };
-
-            fetch(`http://localhost:8080/auth/signup`,reqOptions)
-                .then(res => {
-                    const result = res.json();
-                    console.log(result);
-                    if(res.status > 299 || res.status < 200 ) {
-                        const msg = result && result.message ?
-                        result.message : 'Something Wrong!';
-                        const error = new Error(msg);
-                        throw error;
-                    }
-                    return result;
-                })
-                .then((result) => {
-                    const {token, nickname} = result;
-                    console.log(token);
-                    console.log(nickname);
-                })
+            const result = http.sendRequest('/auth/signup',reqOptions);
+            result
+                .then(console.log)
                 .catch(error => console.log('error', error));
         } else {
             //로그인 요청
             const reqOptions = {
                 method: 'POST',
-                redirect: 'follow',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 body: JSON.stringify({ nickname, password })
             };
-
-            fetch(`http://localhost:8080/auth/login`,reqOptions)
-                .then(res => {
-                    const result = res.json();
-                    console.log(result);
-                    if(res.status > 299 || res.status < 200 ) {
-                        const msg = result && result.message ?
-                        result.message : 'Something Wrong!';
-                        const error = new Error(msg);
-                        throw error;
-                    }
-                    return result;
-                })
-                .then((result) => {
-                    const {token, nickname} = result;
-                    console.log(token);
-                    console.log(nickname);
-                })
-                .catch(error => console.log('error', error));
+            const result = http.sendRequest('/auth/login',reqOptions);
+            result
+            .then(console.log)
+            .catch(error => console.log('error', error));
         }
     }
 

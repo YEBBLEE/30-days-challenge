@@ -16,35 +16,37 @@ class App extends Component {
   state = {
     challenges : []
   }
-  
-  componentDidMount() {
-    const nickname = 'YEBIN';
-    const query = nickname ? `?nickname=${nickname}` : '';
-    
-    const reqOptions = {
-      method: 'GET',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-        
-    fetch(`http://localhost:8080/challenges${query}`, reqOptions)
-      .then(res => {
-        const result = res.json();
-        if(res.status > 299 || res.status < 200) {
-          const msg = result && result.message ? result.message : 'Something Wrong!';
-          const error = new Error(msg);
 
-          throw error;
-        }
-        return result;
-      })
-      .then(result => {
-        console.log(result);
-        this.setState({challenges: result});
-      })
-      .catch(error => console.log('error', error));
+  http = this.props.http;
+
+  componentDidMount() {
+    // const nickname = 'YEBIN';
+    // const query = nickname ? `?nickname=${nickname}` : '';
+    
+    // const reqOptions = {
+    //   method: 'GET',
+    //   redirect: 'follow',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // };
+        
+    // fetch(`http://localhost:8080/challenges${query}`, reqOptions)
+    //   .then(res => {
+    //     const result = res.json();
+    //     if(res.status > 299 || res.status < 200) {
+    //       const msg = result && result.message ? result.message : 'Something Wrong!';
+    //       const error = new Error(msg);
+
+    //       throw error;
+    //     }
+    //     return result;
+    //   })
+    //   .then(result => {
+    //     console.log(result);
+    //     this.setState({challenges: result});
+    //   })
+    //   .catch(error => console.log('error', error));
   }
   
   componentWillUnmount() {
@@ -52,118 +54,63 @@ class App extends Component {
   }
 
   handleStart = (title) => {
-
-    const reqOptions = {
+    const result = this.http.sendRequest
+    ('/challenges',{
       method: 'POST',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({title,nickname:'YEBIN'})
-    };
-
-    fetch(`http://localhost:8080/challenges`, reqOptions)
-      .then(res => {
-        const result = res.json();
-        if(res.status > 299 || res.status < 200) {
-          const msg = result && result.message ? result.message : 'Something Wrong!';
-          const error = new Error(msg);
-
-          throw error;
-        }
-        return result
-      })
+    });
+    
+    result
       .then((result) => {
         const challenge = result;
         const challenges = [challenge, ...this.state.challenges];
         this.setState({challenges});
       })
-      .catch(error => console.log('error', error));
+      .catch((err) => console.log('error',err));
   }
   
   handleModify = (title,challenge) => {
-
     const challengeId = challenge.id;
 
-    const reqOptions = {
-      method: 'PUT',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({title,nickname:'YEBIN'})
-    };
+    const result = this.http.sendRequest
+    (`/challenges/${challengeId}`,
+      { method: 'PUT',body: JSON.stringify({title,nickname:'YEBIN'})}
+    );
 
-    fetch(`http://localhost:8080/challenges/${challengeId}`, reqOptions)
-      .then(res => {
-        const result = res.json();
-        if(res.status > 299 || res.status < 200) {
-          const msg = result && result.message ? result.message : 'Something Wrong!';
-          const error = new Error(msg);
-
-          throw error;
-        }
-        return result
-      })
+    result 
       .then((result) => {
         const modified = result;
         let challenges = [...this.state.challenges];
         challenges.splice(challenges.indexOf(challenge),1,modified);
         this.setState({challenges});
       })
-      .catch(error => console.log('error', error));
+      .catch((err) => console.log('error',err));
   }
 
   handleDelete = (challenge) => {
     const challengeId = challenge.id;
 
-    const reqOptions = {
-      method: 'DELETE',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
+    const result = this.http.sendRequest
+    (`/challenges/${challengeId}`,{ method: 'DELETE'});
 
-    fetch(`http://localhost:8080/challenges/${challengeId}`, reqOptions)
-      .then(res => {
-        let result;
-        if(res.status > 299 || res.status < 200) {
-          const msg = result && result.message ? result.message : 'Something Wrong!';
-          const error = new Error(msg);
-          throw error;
-        }
-        return result;
-      })
-      .then(() => {
-        const challenges = this.state.challenges.filter(challenge => challenge.id !== challengeId );
-        this.setState({challenges});
-      })
-      .catch(error => console.log('error', error));
+    result
+    .then(() => {
+      const challenges = this.state.challenges.filter(challenge => challenge.id !== challengeId );
+      this.setState({challenges});
+    })
+    .catch(error => console.log('error', error));
   }
 
   handleNumber = (challenge,days,isChecked,number) => {
     const daysId = days.id;
 
-    const reqOptions = {
+    const result = this.http.sendRequest
+    (`/challenges/days/${daysId}`,{
       method: 'PUT',
-      redirect: 'follow',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body : JSON.stringify({number,isChecked})
-    };
+    });
 
-    fetch(`http://localhost:8080/challenges/days/${daysId}`, reqOptions)
-      .then(res => {
-        let result = res.json();
-        if(res.status > 299 || res.status < 200) {
-          const msg = result && result.message ? result.message : 'Something Wrong!';
-          const error = new Error(msg);
-          throw error;
-        }
-        return result;
-      })
+    result
       .then((result) => {
         let challenges = [...this.state.challenges];
         const chIdx = challenges.indexOf(challenge);
@@ -186,7 +133,7 @@ class App extends Component {
         <Navbar/>
         <Switch>
           <Route path="/login">
-            <Login/>
+            <Login http={this.props.http}/>
           </Route>
           <Route path="/challenges">
               <ProgressCount 
