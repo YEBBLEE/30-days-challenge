@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import Logo from './Logo';
 import '../css/Login.css';
 
-export function Login({http}) {
+export function Login({authService}) {
     const [signup, setSignup] = useState(false);
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
@@ -17,24 +17,11 @@ export function Login({http}) {
         event.preventDefault();
         if(signup) {
             //회원가입 요청
-            const reqOptions = {
-                method: 'POST',
-                body: JSON.stringify({nickname, password, email, url})
-            };
-            const result = http.sendRequest('/auth/signup',reqOptions);
-            result
-                .then(console.log)
-                .catch(error => console.log('error', error));
+            authService.signup(nickname, password, email, url);
+            
         } else {
             //로그인 요청
-            const reqOptions = {
-                method: 'POST',
-                body: JSON.stringify({ nickname, password })
-            };
-            const result = http.sendRequest('/auth/login',reqOptions);
-            result
-            .then(console.log)
-            .catch(error => console.log('error', error));
+            authService.login(nickname, password);
         }
     }
 

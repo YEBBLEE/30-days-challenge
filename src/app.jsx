@@ -18,6 +18,7 @@ class App extends Component {
   }
 
   http = this.props.http;
+  authService = this.props.authService;
 
   componentDidMount() {
     // const nickname = 'YEBIN';
@@ -133,7 +134,8 @@ class App extends Component {
         <Navbar/>
         <Switch>
           <Route path="/login">
-            <Login http={this.props.http}/>
+            <Login
+              authService = {this.authService}/>
           </Route>
           <Route path="/challenges">
               <ProgressCount 
