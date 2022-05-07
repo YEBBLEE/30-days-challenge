@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import '../src/css/index.css';
 import App from './App';
 import './common/colors.css';
-import './app.css';
+import '../src/css/app.css';
+import '../src/css/navbar.css';
 import HttpClient from './network/http.js';
 
 
