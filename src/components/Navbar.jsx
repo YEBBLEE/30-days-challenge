@@ -5,12 +5,12 @@ const Navbar = (props) => {
     return (
     <div>
         <nav>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
+            <ul className='main-navbar'>
+                <li className='main-menu'>
+                    <Link to="/" className='main-menu-btn'>Home</Link>
                 </li>
-                <li>
-                    <Link to="/login">LogIn/ SignUp</Link>
+                <li className='main-menu'>
+                    <Link to="/login" className='main-menu-btn'>LogIn/ SignUp</Link>
                 </li>
             </ul>
         </nav>

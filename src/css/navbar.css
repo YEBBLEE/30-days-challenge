@@ -1,3 +1,29 @@
+/* Navbar.jsx */
+nav .main-navbar {
+    width: 33vw;
+    margin: auto;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--color-light-blue);
+}
+.main-menu-btn {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 1.25rem;
+    padding: 8px;
+    border-radius: 4px;
+    margin-left: 12px;
+}
+.main-menu-btn:hover {
+    background-color: var(--color-light-blue);
+    color: var(--color-black);
+}
+
+/* ProgressCount.jsx */
 .navbar {
     width: 33vw;
     color: var(--color-white);
