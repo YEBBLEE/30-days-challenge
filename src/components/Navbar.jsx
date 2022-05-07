@@ -6,12 +6,12 @@ const Navbar = (props) => {
     <div>
         <nav>
             <ul>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-            <li>
-                <Link to="/login">LogIn/ SignUp</Link>
-            </li>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/login">LogIn/ SignUp</Link>
+                </li>
             </ul>
         </nav>
     </div>
