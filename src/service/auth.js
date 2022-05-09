@@ -10,13 +10,8 @@ export default class AuthService {
       body: JSON.stringify({nickname, password, email, url})
     };
     const result = this.http.sendRequest('/auth/signup',reqOptions);
-    result
-        .then((result) => {
-          console.log(result);
-          //토큰 저장
-          window.localStorage.setItem('token',result.token);
-        })
-        .catch(error => console.log('error', error));
+    window.localStorage.setItem('token', result.token);
+    return result;
   }
 
   //로그인 요청
@@ -26,14 +21,12 @@ export default class AuthService {
       body: JSON.stringify({ nickname, password })
     };
     const result = this.http.sendRequest('/auth/login',reqOptions);
-    result
-    .then((result) => {
-      console.log(result);
-      //토큰 저장
-      window.localStorage.setItem('token',result.token);
-    })
-    .catch(error => console.log('error', error));
+    window.localStorage.setItem('token',result.token);
+    return result;
   }
 
-  //todo : 로그아웃 요청
+  //로그아웃
+  async logout() {
+    window.localStorage.clear('token');
+  }
 }

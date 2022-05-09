@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import Logo from './Logo';
 import '../css/Login.css';
 
-export function Login({authService}) {
+export function Login({onSignup, onLogin}) {
     const [signup, setSignup] = useState(false);
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');
@@ -17,11 +17,10 @@ export function Login({authService}) {
         event.preventDefault();
         if(signup) {
             //회원가입 요청
-            authService.signup(nickname, password, email, url);
-            
+            onSignup(nickname, password, email, url);
         } else {
             //로그인 요청
-            authService.login(nickname, password);
+            onLogin(nickname, password);
         }
     }
 
