@@ -8,11 +8,14 @@ import {
   Redirect
 } from 'react-router-dom';
 import Navbar from './Navbar';
+import ModalAlert from './ModalAlert';
 
 class Routes extends Component {
   
   state = {
-    user: undefined
+    user: undefined,
+    text :'',
+    isAlert : false,
   }
 
   http = this.props.http;
@@ -26,8 +29,12 @@ class Routes extends Component {
         const user = result;
         this.setState({user});
         this.props.history.push('/challenges');
-      })
-      .catch(error => console.log('error', error));
+      })      
+      .catch(error => {
+        const text = error.message.toString();
+        console.log(text);
+        this.setState({text, isAlert : true});
+      });
   };
 
   handleLogin = (nickname, password) => {
@@ -38,7 +45,11 @@ class Routes extends Component {
         this.setState({user});
         this.props.history.push('/challenges');
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        const text = error.message.toString();
+        console.log(text);
+        this.setState({text, isAlert : true});
+      });
   };
 
   handleLogout = () => {
@@ -46,9 +57,16 @@ class Routes extends Component {
       .logout()
       .then(() => {
         this.setState({user:undefined});
+        this.handleModalClose();
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error); 
+      });
   };
+
+  handleModalClose = () => {
+    this.setState({text:'',isAlert:false});
+  }
 
   render() {
     console.log('Routes컴포넌트 Render');
@@ -61,6 +79,12 @@ class Routes extends Component {
         {!this.state.user ? <Redirect to="/" /> : <Redirect to="/challenges" />}
         <Switch>
           <Route path="/login">
+            {this.state.text && 
+              <ModalAlert 
+                text={this.state.text} 
+                isAlert={this.state.isAlert} 
+                onClose={this.handleModalClose}/>
+            }
             <Login
               onSignup = {this.handleSignup}
               onLogin = {this.handleLogin}/>

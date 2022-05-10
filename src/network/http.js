@@ -17,13 +17,12 @@ export default class HttpClient {
     let result;
     try {
       result = await response.json();
-      console.log(result);
     } catch (error) {
       /**
       SyntaxError: Unexpected end of JSON input
       at HttpClient.sendRequest (http.js:19:1)
        */
-      console.log(error);
+      console.error(error);
     }
 
     if(response.status > 299 || response.status < 200 ) {
