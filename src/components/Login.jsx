@@ -65,6 +65,7 @@ export function Login({onSignup, onLogin}) {
                     value={password}
                     onChange={onChange}
                     required
+                    type="password"
                 />
                 {signup && (
                     <>
