@@ -4,7 +4,7 @@ export default class ChallengeService {
   }
 
   async getChallenges(nickname) {
-    const query = nickname ? `nickname=${nickname}` : '';
+    const query = nickname ? `?nickname=${nickname}` : '';
     const reqOptions = {
       method: 'GET',
     };
