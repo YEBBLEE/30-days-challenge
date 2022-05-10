@@ -9,80 +9,46 @@ class Challenges extends Component {
         challenges : []
     }
 
-    http = this.props.http;
+    challengeService = this.props.challengeService;
 
     componentDidMount() {
         console.log(`[Challenges] DidMount!! : ${this.props.user}`);
-        if (!this.props.user) {
-            return
-        }
-        const nickname = this.props.user.nickname;
-        console.log(nickname);
-        const query = nickname ? `?nickname=${nickname}` : '';
-        const reqOptions = {
-            method: 'GET',
-            redirect: 'follow',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-        
-        fetch(`http://localhost:8080/challenges${query}`, reqOptions)
-            .then(res => {
-                const result = res.json();
-                if(res.status > 299 || res.status < 200) {
-                    const msg = result && result.message ? result.message : 'Something Wrong!';
-                    const error = new Error(msg)
-                    throw error;
-                }
-                return result;
-            })
+        if (!this.props.user) { return }
+        this.challengeService
+            .getChallenges(this.props.user.nickname)
             .then(result => {
-                console.log(result);
                 this.setState({challenges: result});
-            })
+            })            
             .catch(error => console.log('error', error));  
     }
 
     handleStart = (title) => {
-        const result = this.http.sendRequest
-        ('/challenges',{
-            method: 'POST',
-            body: JSON.stringify({title,nickname:`${this.props.user.nickname}`})
-        });
-        
-        result
-            .then((result) => {
+        this.challengeService
+            .postChallenge(title,this.props.user.nickname)
+            .then(result => {
                 const challenge = result;
                 const challenges = [challenge, ...this.state.challenges];
                 this.setState({challenges});
-            })
+            })            
             .catch((err) => console.log('error',err));
     }
 
     handleDelete = (challenge) => {
         const challengeId = challenge.id;
-
-        const result = this.http.sendRequest
-        (`/challenges/${challengeId}`,{ method: 'DELETE'});
-    
-        result
-        .then(() => {
-            const challenges = this.state.challenges.filter(challenge => challenge.id !== challengeId );
-            this.setState({challenges});
-        })
-        .catch(error => console.log('error', error));
+        this.challengeService
+            .deleteChallenge(challengeId)
+            .then(() => {
+                const challenges = this.state.challenges.filter(challenge => challenge.id !== challengeId );
+                this.setState({challenges});
+            })
+            .catch(error => console.log('error', error));
     }
     
     handleModify = (title,challenge) => {
         const challengeId = challenge.id;
-
-        const result = this.http.sendRequest
-        (`/challenges/${challengeId}`,
-            { method: 'PUT',body: JSON.stringify({title,nickname:`${this.props.user.nickname}`})}
-        );
-    
-        result 
+        const nickname = this.props.user.nickname;
+        this.challengeService
+            .updateChallengeTitle(nickname,title,challengeId)
             .then((result) => {
                 const modified = result;
                 let challenges = [...this.state.challenges];
@@ -94,14 +60,8 @@ class Challenges extends Component {
 
     handleNumber = (challenge,days,isChecked,number) => {
         const daysId = days.id;
-
-        const result = this.http.sendRequest
-        (`/challenges/days/${daysId}`,{
-            method: 'PUT',
-            body : JSON.stringify({number,isChecked})
-        });
-    
-        result
+        this.challengeService
+            .updateChallengeNumber(daysId, number, isChecked)
             .then((result) => {
                 let challenges = [...this.state.challenges];
                 const chIdx = challenges.indexOf(challenge);
@@ -110,12 +70,6 @@ class Challenges extends Component {
                 this.setState({challenges});
             })
             .catch(error => console.log('error', error));
-    }
-
-    setEndDate = () => {
-        let date = new Date();
-        date.setDate(date.getDate() + 30);
-        return date.toLocaleDateString();
     }
 
     render() {

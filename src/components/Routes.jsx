@@ -17,9 +17,10 @@ class Routes extends Component {
 
   http = this.props.http;
   authService = this.props.authService;
-  
+  challengeService = this.props.challengeService;
+
   handleSignup = (nickname, password, email, url) => {
-    this.props.authService
+    this.authService
       .signup(nickname, password, email, url)
       .then((result) => {
         const user = result;
@@ -30,7 +31,7 @@ class Routes extends Component {
   };
 
   handleLogin = (nickname, password) => {
-    this.props.authService
+    this.authService
       .login(nickname, password)
       .then((result) => {
         const user = result;
@@ -41,7 +42,7 @@ class Routes extends Component {
   };
 
   handleLogout = () => {
-    this.props.authService
+    this.authService
       .logout()
       .then(() => {
         this.setState({user:undefined});
@@ -66,8 +67,8 @@ class Routes extends Component {
           </Route>
           <Route path="/challenges">
               <Challenges
-                http = {this.http}
-                user = {this.state.user}/>
+                user = {this.state.user}
+                challengeService = {this.challengeService}/>
           </Route>
         </Switch>
       </>
