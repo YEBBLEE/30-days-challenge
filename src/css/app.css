@@ -33,6 +33,7 @@ input {
   border: none;
   color: var(--color-white);
   padding: 0px 20px;
+  letter-spacing: 1px;
 }
 .wrapper {
   cursor: pointer;

@@ -22,7 +22,7 @@ const Navbar = ({user, onLogout}) => {
                         <Link to="/" className='main-menu-btn'>Home</Link>
                     </li>
                     <li className='main-menu'>
-                        <Link to="/login" className='main-menu-btn'>LogIn/ SignUp</Link>
+                        <Link to="/login" className='main-menu-btn'>LogIn/SignUp</Link>
                     </li>
                     </>
 

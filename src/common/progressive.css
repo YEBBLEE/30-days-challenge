@@ -1,0 +1,32 @@
+/* 반응형 */
+@media (max-width:768px) {
+  nav .main-navbar {
+    width: initial;
+  }
+  .navbar {
+    width: initial;
+  }
+  .navbar-title {
+    font-size: 1.25rem;
+  }
+  .navbar-txt {
+    font-size: 1rem;
+  }
+  .navbar-coutNumber {
+    font-size: 1.5rem;
+  }
+  .challenge-form {
+    width: 90%;
+  }
+  .challenges {
+    width: 90%;
+  }
+  .challenges li {
+    width: 69%;
+    height: initial;
+  }
+}
+
+@media (max-width:320px) {
+  
+}
