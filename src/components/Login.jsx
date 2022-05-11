@@ -92,17 +92,22 @@ export function Login({onSignup, onLogin}) {
                     />
                     </>
                 )}
+                <div className="btn-wrapper">
+                    <button className='form-btn' type='submit'>
+                        <span>
+                            {!signup ? 'Log In' : 'Sign Up'}
+                        </span>
+                    </button>
+                </div>
                 {!signup && (
+                    <div className="btn-wrapper">
                     <button 
                         className='form-btn'
-                        onClick={handleNewAccountBtn}
-                    >
-                        Create a New Account 👻
+                        onClick={handleNewAccountBtn}>
+                        <span>Create a New Account 👻</span>
                     </button>
+                    </div>
                 )}
-                <button className='form-btn' type='submit'>
-                    {signup ? 'Sign Up' : 'Log In'}
-                </button>
             </form>
         </>
     );

@@ -41,13 +41,16 @@ class Challenge extends Component {
         return (
             <li className='challenge'>
                 <div className="top-box">
-                    <input 
-                        ref={this.titleRef}
-                        type="text" 
-                        className="challenge-title" 
-                        defaultValue={title} 
-                        disabled={this.state.disabled}>
-                    </input>
+                    <div className="title-box">
+                        <input 
+                            ref={this.titleRef}
+                            type="text" 
+                            className='challenge-title' 
+                            defaultValue={title} 
+                            disabled={this.state.disabled}>
+                        </input>
+                        <label className={`bottom-line ${this.state.disabled ? 'no-focus' : 'focus'}`}></label>
+                    </div>
                     <div>
                         {this.state.disabled === false ?
                             <button

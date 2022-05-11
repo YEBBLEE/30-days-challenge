@@ -19,7 +19,11 @@ class InputForm extends Component {
                     className='challenge-input' 
                     placeholder='Input your challenge to start'
                 />
-                <button className='challenge-btn'>START!</button>
+                <div className="wrapper">
+                    <button className='challenge-btn'>
+                        <span>START!</span>
+                    </button>
+                </div>
             </form>
         );
     }
