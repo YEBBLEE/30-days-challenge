@@ -51,7 +51,7 @@ class Challenge extends Component {
                         </input>
                         <label className={`bottom-line ${this.state.disabled ? 'no-focus' : 'focus'}`}></label>
                     </div>
-                    <div>
+                    <div className='btn-box'>
                         {this.state.disabled === false ?
                             <button
                                 className='challenge-button'
@@ -79,7 +79,8 @@ class Challenge extends Component {
                 <div className="mid-box">
                     {
                         dayList.map( day => 
-                            <ChallengeNum key={day.number} 
+                            <ChallengeNum 
+                            key={day.number} 
                             day={day}
                             challenge={this.props.challenge}
                             onNumberClicked={this.handleNumber}

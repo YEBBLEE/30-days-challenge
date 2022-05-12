@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class ChallengeNum extends Component {
+    state = {
+        bouncing:false
+    }
 
     handleNumber = () => {
         this.props
@@ -10,12 +13,21 @@ class ChallengeNum extends Component {
             this.props.day.number);
     }
 
+    toggleRubberBand = (e) => {
+        this.setState({bouncing : !this.state.bouncing});
+    }
+
     render() {
         const {number,isChecked} = this.props.day;
         return (
-            <div onClick={this.handleNumber}>
+            <div onMouseEnter={this.toggleRubberBand}>
                 <p
-                    className={isChecked? 'number-through':''}>
+                    className={`
+                        ${this.state.bouncing ? 'bouncing' : ''}
+                        ${isChecked? 'number-through':''}`}
+                    
+                    onClick={this.handleNumber} 
+                    >
                     {number}
                 </p>
             </div>

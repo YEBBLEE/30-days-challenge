@@ -100,13 +100,9 @@ input {
   background-color: transparent;
 }
 .challenges li {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   list-style: none;
   background-color: var(--color-black);
-  width: 24vw;
-  height: 24vw;
+  width: 69%;
   color: var(--color-white);
   padding: 30px;
   margin: 40px auto;
@@ -115,16 +111,21 @@ input {
 .top-box {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 .title-box {
   position: relative;
   display: block;
+}
+.btn-box {
+  display: flex;
 }
 .challenge-title {
   font-size: 1rem;
   background-color: transparent;
   color: var(--color-white);
   border: 0;
+  margin-bottom: 8px;
 }
 .bottom-line {
   position: absolute;
@@ -146,7 +147,6 @@ input {
 .challenge-button {
   background-color: transparent;
   border: none;
-  margin-left: 1em;
   width: 1.5rem;
   height: 1.5rem;
   color: var(--color-white);
@@ -172,7 +172,7 @@ input {
 }
 .mid-box {
   width: 100%;
-  margin: auto;
+  margin: 14px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
@@ -180,18 +180,55 @@ input {
   text-align: center;
   cursor: pointer;
 }
+.mid-box div {
+  margin: 1px;
+  border: 1px solid transparent;
+}
+.mid-box div:hover {
+  color: var(--color-light-blue);
+  font-weight: bold;
+  border: 1px solid var(--color-light-blue);
+}
+.bouncing {
+  animation : rubberband 800ms alternate ease-out;
+}
+@keyframes rubberband {
+    0%{
+        transform: scaleX(1);
+    }
+    40%{
+        transform: scaleX(1.5) scaleY(0.75);
+    }
+    55%{
+        transform: scaleX(0.85) scaleY(1);
+    }
+    65%{
+        transform: scaleX(1.09) scaleY(0.85);
+    }
+    75%{
+        transform: scaleX(0.9)  scaleY(1);
+    }
+    90%{
+        transform: scaleX(1.05) scaleY(0.95);
+    }
+    100%{
+        transform: scaleX(1) scaleY(1);
+    }
+}
 .number-through {
   text-decoration: line-through;
   color: var(--color-light-blue);
 }
 .bottom-box {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 .day-info p {
   margin: 0;
   font-size: 0.75rem;
+  letter-spacing: 1px;
 }
 .progress-circle {
   width: 50px;
@@ -203,7 +240,7 @@ input {
   color: var(--color-light-gray);
   font-size: 1.5rem;
   font-weight: bold;
-  line-height: 50px;
+  line-height: 49px;
   text-align: center;
   margin: 0;
 }

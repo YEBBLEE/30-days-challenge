@@ -1,10 +1,21 @@
 /* 반응형 */
-@media (max-width:768px) {
+@media (max-width: 1024px) {
   nav .main-navbar {
     width: initial;
   }
   .navbar {
     width: initial;
+  }
+  .challenge-form {
+    width: 75%;
+  }
+  .challenges {
+    width: 75%;
+  }
+}
+@media (max-width:768px) {
+  .auth-form {
+    width: 75%;
   }
   .navbar-title {
     font-size: 1.25rem;
@@ -16,17 +27,29 @@
     font-size: 1.5rem;
   }
   .challenge-form {
+    width: 85%;
+  }
+  .wrapper span {
+    font-size: 0.75rem;
+  }
+  .challenges {
+    width: 85%;
+  }
+  .challenges li {
+    width: 69%;
+    height: initial;
+    margin: 20px auto;
+  }
+}
+
+@media (max-width:320px) {
+  .auth-form {
+    width: 90%;
+  }
+  .challenge-form {
     width: 90%;
   }
   .challenges {
     width: 90%;
   }
-  .challenges li {
-    width: 69%;
-    height: initial;
-  }
-}
-
-@media (max-width:320px) {
-  
 }
