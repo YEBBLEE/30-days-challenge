@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import Challenge from './Challenge';
 import InputForm from './InputForm';
+import ModalAlert from './ModalAlert';
 import ProgressCount from './ProgressCount';
 
 class Challenges extends Component {
 
     state = {
-        challenges : []
+        challenges : [],
+        text : '',
+        isAlert : false,
     }
 
     challengeService = this.props.challengeService;
 
     componentDidMount() {
-        console.log(`[Challenges] DidMount!! : ${this.props.user}`);
+        console.log(`[Challenges] DidMount!!`);
         if (!this.props.user) { return }
         this.challengeService
             .getChallenges(this.props.user.nickname)
@@ -22,6 +25,14 @@ class Challenges extends Component {
             .catch(error => console.log('error', error));  
     }
 
+    handleModalClose = () => {
+        this.setState({text:'',isAlert:false});
+    }
+
+    handlModalOpen = (text) => {
+        this.setState({text, isAlert : true});
+    }
+
     handleStart = (title) => {
         this.challengeService
             .postChallenge(title,this.props.user.nickname)
@@ -29,8 +40,12 @@ class Challenges extends Component {
                 const challenge = result;
                 const challenges = [challenge, ...this.state.challenges];
                 this.setState({challenges});
-            })            
-            .catch((err) => console.log('error',err));
+            })
+            .catch((error) => {
+                const text = error.message.toString();
+                console.log(text);
+                this.handlModalOpen(text);
+            });            
     }
 
     handleDelete = (challenge) => {
@@ -55,7 +70,11 @@ class Challenges extends Component {
                 challenges.splice(challenges.indexOf(challenge),1,modified);
                 this.setState({challenges});
             })
-            .catch((err) => console.log('error',err));
+            .catch((error) => {
+                const text = error.message.toString();
+                console.log(text);
+                this.handlModalOpen(text);
+            });
     }
 
     handleNumber = (challenge,days,isChecked,number) => {
@@ -77,6 +96,12 @@ class Challenges extends Component {
         <>
         {this.props.user && (
             <>
+            {this.state.text && (
+                <ModalAlert
+                    text={this.state.text}
+                    isAlert={this.state.isAlert}
+                    onClose={this.handleModalClose}/>
+            )}
             <ProgressCount 
             countNumber={this.state.challenges.filter(challenge => challenge.isProgress).length}
             />
