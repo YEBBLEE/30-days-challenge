@@ -81,7 +81,7 @@ export function Login({onSignup, onLogin}) {
                         required
                     />
                     <label className='input-label'>
-                        Profile URL
+                        Profile URL (optional)
                     </label>
                     <input 
                         name='url'
