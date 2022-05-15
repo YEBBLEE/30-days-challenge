@@ -28,13 +28,15 @@ class Challenge extends Component {
         titleInput && this.props.onModify(titleInput,this.props.challenge);
     }
 
-    handleNumber = (challenge,days,isClicked,number) => {
-        this.props.onNumberClicked(challenge,days,isClicked,number);
+    handleNumber = (challenge,daysInfo,isClicked,number) => {
+        this.props.onNumberClicked(challenge,daysInfo,isClicked,number);
     }
 
     render() {
-        const {title,days,startDate,endDate} = this.props.challenge;
-        const dayList = days.days;
+        const {title,daysInfo,startDate,endDate} = this.props.challenge;
+        console.log('## challenge컴포넌트 render ##');
+        console.log(this.props.challenge);
+        const dayList = daysInfo.days;
         const count = dayList.filter(day => day.isChecked).length;
         const ratio = (count/dayList.length)*100;
 

@@ -50,10 +50,13 @@ class Challenges extends Component {
 
     handleDelete = (challenge) => {
         const challengeId = challenge.id;
+        const daysId = challenge.daysInfo.id;
         this.challengeService
-            .deleteChallenge(challengeId)
+            .deleteChallenge(challengeId,daysId)
             .then(() => {
                 const challenges = this.state.challenges.filter(challenge => challenge.id !== challengeId );
+                console.log('## 삭제 후 challenges ##');
+                console.log(challenges);
                 this.setState({challenges});
             })
             .catch(error => console.log('error', error));
@@ -65,10 +68,11 @@ class Challenges extends Component {
         this.challengeService
             .updateChallengeTitle(nickname,title,challengeId)
             .then((result) => {
-                const modified = result;
-                let challenges = [...this.state.challenges];
-                challenges.splice(challenges.indexOf(challenge),1,modified);
-                this.setState({challenges});
+                const updatedChallenges = this.state.challenges.map((challenge) => (
+                    challenge.id === result.id ? result : challenge));
+                console.log('## 타이틀 수정후 challenges ##');
+                console.log(updatedChallenges);
+                this.setState({challenges: updatedChallenges});
             })
             .catch((error) => {
                 const text = error.message.toString();
@@ -77,21 +81,31 @@ class Challenges extends Component {
             });
     }
 
-    handleNumber = (challenge,days,isChecked,number) => {
-        const daysId = days.id;
+    handleNumber = (challenge,daysInfo,isChecked,number) => {
+        const chId = challenge.id;
+        const daysId = daysInfo.id;
+        console.log(`
+        daysInfo : ${daysInfo}
+        daysId : ${daysId}
+        chId : ${chId}
+        isChecked : ${isChecked}
+        number : ${number}
+        `);
         this.challengeService
-            .updateChallengeNumber(daysId, number, isChecked)
+            .updateChallengeNumber(daysId, number, isChecked,chId)
             .then((result) => {
-                let challenges = [...this.state.challenges];
-                const chIdx = challenges.indexOf(challenge);
-                const modifiedChallenge = result;
-                challenges.splice(chIdx,1,modifiedChallenge);
-                this.setState({challenges});
+                const updatedChallenges = this.state.challenges.map((challenge) => (
+                    challenge.id === result.id ? result : challenge));
+                console.log('## 숫자 클릭후 challenges ##');
+                console.log(updatedChallenges);
+                this.setState({challenges: updatedChallenges});
             })
             .catch(error => console.log('error', error));
     }
 
     render() {
+        console.log('## Challenges컴포넌트 렌더 ##');
+        console.log(this.state.challenges);
         return (
         <>
         {this.props.user && (
@@ -109,7 +123,7 @@ class Challenges extends Component {
                 onStart = {this.handleStart}
             />
             <ul className='challenges'>
-                {this.state.challenges.map(challenge => 
+                {this.state.challenges.length > 0 && this.state.challenges.map(challenge => 
                     <Challenge
                         key={challenge.id}
                         challenge={challenge}
