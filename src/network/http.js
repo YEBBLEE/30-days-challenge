@@ -13,10 +13,11 @@ export default class HttpClient {
     };
 
     const response = await fetch(`${this.baseUrl}${url}`,reqOptions);
-
     let result;
     try {
       result = await response.json();
+      console.log(`## http result `);
+      console.log(result);
     } catch (error) {
       /**
       SyntaxError: Unexpected end of JSON input

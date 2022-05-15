@@ -22,9 +22,12 @@ export default class ChallengeService {
     return this.http.sendRequest('/challenges',reqOptions);
   }
 
-  async deleteChallenge(challengeId) {
+  async deleteChallenge(challengeId,daysId) {
     return this.http.sendRequest(`/challenges/${challengeId}`,{
-      method: 'DELETE'
+      method: 'DELETE',
+      body: JSON.stringify({
+        daysId
+      })
     });
   }
 
@@ -36,11 +39,11 @@ export default class ChallengeService {
         });
   }
 
-  async updateChallengeNumber(daysId, number, isChecked) {
+  async updateChallengeNumber(daysId, number, isChecked,chId) {
     return this.http.sendRequest(`/challenges/days/${daysId}`,
       {
         method: 'PUT',
-        body : JSON.stringify({number, isChecked})
+        body : JSON.stringify({number, isChecked,chId})
       }
     );
   }
