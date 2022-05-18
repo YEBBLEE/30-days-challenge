@@ -11,7 +11,8 @@ import HttpClient from '../src/network/http.js';
 import AuthService from '../src/service/auth.js';
 import ChallengeService from './service/challenges.js';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = 'https://yebb-whybbb.com:8080';
+console.log(`baseUrl : ${baseUrl}`);
 const httpClient = new HttpClient(baseUrl);
 const authService = new AuthService(httpClient);
 const challengeService = new ChallengeService(httpClient);
