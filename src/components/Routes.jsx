@@ -68,6 +68,19 @@ class Routes extends Component {
     this.setState({text:'',isAlert:false});
   }
 
+  initializeUser = () => {
+    const nickname = window.localStorage.getItem('nickname');
+    const token = window.localStorage.getItem('token');
+    if(!nickname || !token) return;
+
+    const user = {token, nickname};
+    this.setState({user});
+  }
+
+  componentDidMount() {
+    this.initializeUser();
+  }
+
   render() {
     console.log('Routes컴포넌트 Render');
     return (
@@ -78,7 +91,7 @@ class Routes extends Component {
         />
         {!this.state.user ? <Redirect to="/" /> : <Redirect to="/challenges" />}
         <Switch>
-          <Route path="/login">
+          <Route path="/login" exact>
             {this.state.text && 
               <ModalAlert 
                 text={this.state.text} 

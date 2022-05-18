@@ -11,6 +11,7 @@ export default class AuthService {
     };
     const result = await this.http.sendRequest('/auth/signup',reqOptions);
     window.localStorage.setItem('token', result.token);
+    window.localStorage.setItem('nickname', result.nickname);
     return result;
   }
 
@@ -22,6 +23,7 @@ export default class AuthService {
     };
     const result = await this.http.sendRequest('/auth/login',reqOptions);
     window.localStorage.setItem('token',result.token);
+    window.localStorage.setItem('nickname', result.nickname);
     return result;
   }
 
