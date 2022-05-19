@@ -68,13 +68,22 @@ class Routes extends Component {
     this.setState({text:'',isAlert:false});
   }
 
-  initializeUser = () => {
-    const nickname = window.localStorage.getItem('nickname');
+  initializeUser = async () => {
+    const nickname =  window.localStorage.getItem('nickname');
     const token = window.localStorage.getItem('token');
     if(!nickname || !token) return;
 
-    const user = {token, nickname};
-    this.setState({user});
+    token && this.authService
+      .me(token)
+      .then((result)=>{
+        const user = result;
+        console.log(`initializeUser 결과`);
+        console.log(user);
+        this.setState({user});
+      })
+      .catch(error => {
+        console.log('error',error);
+      });
   }
 
   componentDidMount() {

@@ -31,4 +31,14 @@ export default class AuthService {
   async logout() {
     window.localStorage.clear('token');
   }
+
+  async me() {
+    const token = window.localStorage.getItem('token');
+    const reqOptions = {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}`},
+    };
+    const result = await this.http.sendRequest('/auth/me',reqOptions);
+    return result;
+  }
 }
