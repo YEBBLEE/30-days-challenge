@@ -6,6 +6,7 @@ import './common/colors.css';
 import '../src/css/app.css';
 import '../src/css/navbar.css';
 import '../src/css/modalAlert.css';
+import '../src/css/home.css';
 import '../src/common/progressive.css';
 import HttpClient from '../src/network/http.js';
 import AuthService from '../src/service/auth.js';
