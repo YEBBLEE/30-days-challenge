@@ -68,6 +68,28 @@ class Routes extends Component {
     this.setState({text:'',isAlert:false});
   }
 
+  initializeUser = async () => {
+    const nickname =  window.localStorage.getItem('nickname');
+    const token = window.localStorage.getItem('token');
+    if(!nickname || !token) return;
+
+    token && this.authService
+      .me(token)
+      .then((result)=>{
+        const user = result;
+        console.log(`initializeUser 결과`);
+        console.log(user);
+        this.setState({user});
+      })
+      .catch(error => {
+        console.log('error',error);
+      });
+  }
+
+  componentDidMount() {
+    this.initializeUser();
+  }
+
   render() {
     console.log('Routes컴포넌트 Render');
     return (
@@ -78,7 +100,7 @@ class Routes extends Component {
         />
         {!this.state.user ? <Redirect to="/" /> : <Redirect to="/challenges" />}
         <Switch>
-          <Route path="/login">
+          <Route path="/login" exact>
             {this.state.text && 
               <ModalAlert 
                 text={this.state.text} 

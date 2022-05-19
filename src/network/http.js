@@ -8,7 +8,8 @@ export default class HttpClient {
       ...options,
       redirect: 'follow',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...options.headers,
       }
     };
 
