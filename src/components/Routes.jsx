@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '@fortawesome/fontawesome-free/js/all.js';
 import Challenges from './Challenges';
 import Login from './Login';
+import Home from './Home';
 import {
   Switch,
   Route,
@@ -100,6 +101,9 @@ class Routes extends Component {
         />
         {!this.state.user ? <Redirect to="/" /> : <Redirect to="/challenges" />}
         <Switch>
+          <Route path='/' exact>
+            <Home/>
+          </Route>
           <Route path="/login" exact>
             {this.state.text && 
               <ModalAlert 
