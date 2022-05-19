@@ -6,10 +6,10 @@ function Footer() {
     <div className='footer-container'>
       <h3 className="footer-title">Contact me 😎</h3>
       <div className="icon-links">
-        <a href="https://github.com/YEBBLEE" target='_blank'>
+        <a href="https://github.com/YEBBLEE" target='_blank' rel="noreferrer">
             <i className="fa-brands fa-github"></i>
         </a>
-        <a href="https://velog.io/@yebb" target='_blank'>
+        <a href="https://velog.io/@yebb" target='_blank' rel="noreferrer">
           <i className="fa-brands fa-blogger"></i>
         </a>
       </div>
