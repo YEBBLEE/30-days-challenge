@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  console.log(`[Home] Render!`);
   return (
     <>
       <Logo/>
@@ -32,4 +33,4 @@ function Home() {
     </>
   );
 };
-export default Home;
+export default React.memo(Home);

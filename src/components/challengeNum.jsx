@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class ChallengeNum extends Component {
+class ChallengeNum extends PureComponent {
     state = {
         bouncing:false
     }
@@ -18,6 +18,7 @@ class ChallengeNum extends Component {
     }
 
     render() {
+        console.log('[ ChallengeNum ] Render!');
         const {number,isChecked} = this.props.day;
         return (
             <div onMouseEnter={this.toggleRubberBand}>

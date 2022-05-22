@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class InputForm extends Component {
+class InputForm extends PureComponent {
     inputRef = React.createRef();
 
     handleStart = (e) => {
@@ -11,6 +11,7 @@ class InputForm extends Component {
     };
 
     render() {
+        console.log(`[InputForm] Render!`);
         return (
             <form className='challenge-form' onSubmit={this.handleStart}>
                 <input 

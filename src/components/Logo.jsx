@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Logo extends Component {
+class Logo extends PureComponent {
     render() {
+        console.log(`[Logo] Render!`);
         return (
             <div className='navbar'>
                 <h1 className='navbar-title'>30 DAYS CHALLANGE</h1>

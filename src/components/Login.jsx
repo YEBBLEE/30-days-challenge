@@ -3,6 +3,7 @@ import Logo from './Logo';
 import '../css/Login.css';
 
 export function Login({onSignup, onLogin}) {
+    console.log(`[Login] Render!`);
     const [signup, setSignup] = useState(false);
     const [nickname, setNickname] = useState('');
     const [password, setPassword] = useState('');

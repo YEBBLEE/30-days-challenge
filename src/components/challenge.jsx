@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 
 import 'react-circular-progressbar/dist/styles.css';
 import '../common/circle.css';
 import ChallengeNum from './ChallengeNum';
 
-class Challenge extends Component {
+class Challenge extends PureComponent {
     titleRef = React.createRef();
     
     state = {
@@ -33,9 +33,8 @@ class Challenge extends Component {
     }
 
     render() {
+        console.log(`[ Challenge ] Render!`);
         const {title,daysInfo,startDate,endDate} = this.props.challenge;
-        console.log('## challenge컴포넌트 render ##');
-        console.log(this.props.challenge);
         const dayList = daysInfo.days;
         const count = dayList.filter(day => day.isChecked).length;
         const ratio = (count/dayList.length)*100;

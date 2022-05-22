@@ -92,7 +92,7 @@ class Routes extends Component {
   }
 
   render() {
-    console.log('Routes컴포넌트 Render');
+    console.log('[ Routes ] Render');
     return (
       <>
         <Navbar 

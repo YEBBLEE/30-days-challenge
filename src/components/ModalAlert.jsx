@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ModalAlert({text, isAlert,onClose}) {
+  console.log('[ ModalAlert ] Render');
   return (
     <>
     { text && (
@@ -16,4 +17,4 @@ function ModalAlert({text, isAlert,onClose}) {
   )
     
 }
-export default ModalAlert;
+export default React.memo(ModalAlert);

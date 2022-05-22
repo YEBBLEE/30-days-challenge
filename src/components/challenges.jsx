@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Challenge from './Challenge';
 import InputForm from './InputForm';
 import ModalAlert from './ModalAlert';
 import ProgressCount from './ProgressCount';
 
-class Challenges extends Component {
+class Challenges extends PureComponent {
 
     state = {
         challenges : [],
@@ -104,8 +104,7 @@ class Challenges extends Component {
     }
 
     render() {
-        console.log('## Challenges컴포넌트 렌더 ##');
-        console.log(this.state.challenges);
+        console.log('[ Challenges ] Render!');
         return (
         <>
         {this.props.user && (
