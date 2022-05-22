@@ -17,12 +17,10 @@ class Challenge extends PureComponent {
     }
 
     handleEdit = () => {
-        console.log('펜슬아이콘 클릭!');
         this.setState({disabled : !this.state.disabled});
     }
     
     handleModify = () => {
-        console.log('체크아이콘 클릭!');
         this.setState({disabled : !this.state.disabled});
         const titleInput = this.titleRef.current.value;
         titleInput && this.props.onModify(titleInput,this.props.challenge);
@@ -33,7 +31,6 @@ class Challenge extends PureComponent {
     }
 
     render() {
-        console.log(`[ Challenge ] Render!`);
         const {title,daysInfo,startDate,endDate} = this.props.challenge;
         const dayList = daysInfo.days;
         const count = dayList.filter(day => day.isChecked).length;

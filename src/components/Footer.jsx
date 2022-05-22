@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Footer() {
-  console.log(`[Footer] Render!`);
   return (
     <div className='footer-wrapp'>
     <div className='footer-container'>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({user, onLogout}) => {
-    console.log('[ Navbar ] Render');
     return (
     <div>
         <nav>

@@ -11,7 +11,6 @@ class InputForm extends PureComponent {
     };
 
     render() {
-        console.log(`[InputForm] Render!`);
         return (
             <form className='challenge-form' onSubmit={this.handleStart}>
                 <input 

@@ -33,7 +33,6 @@ class Routes extends Component {
       })      
       .catch(error => {
         const text = error.message.toString();
-        console.log(text);
         this.setState({text, isAlert : true});
       });
   };
@@ -48,7 +47,6 @@ class Routes extends Component {
       })
       .catch(error => {
         const text = error.message.toString();
-        console.log(text);
         this.setState({text, isAlert : true});
       });
   };
@@ -78,8 +76,6 @@ class Routes extends Component {
       .me(token)
       .then((result)=>{
         const user = result;
-        console.log(`initializeUser 결과`);
-        console.log(user);
         this.setState({user});
       })
       .catch(error => {
@@ -92,7 +88,6 @@ class Routes extends Component {
   }
 
   render() {
-    console.log('[ Routes ] Render');
     return (
       <>
         <Navbar 

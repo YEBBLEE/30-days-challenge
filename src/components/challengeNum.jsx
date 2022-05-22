@@ -18,7 +18,6 @@ class ChallengeNum extends PureComponent {
     }
 
     render() {
-        console.log('[ ChallengeNum ] Render!');
         const {number,isChecked} = this.props.day;
         return (
             <div onMouseEnter={this.toggleRubberBand}>

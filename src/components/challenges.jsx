@@ -15,7 +15,6 @@ class Challenges extends PureComponent {
     challengeService = this.props.challengeService;
 
     componentDidMount() {
-        console.log(`[Challenges] DidMount!!`);
         if (!this.props.user) { return }
         this.challengeService
             .getChallenges(this.props.user.nickname)
@@ -43,7 +42,6 @@ class Challenges extends PureComponent {
             })
             .catch((error) => {
                 const text = error.message.toString();
-                console.log(text);
                 this.handlModalOpen(text);
             });            
     }
@@ -55,8 +53,6 @@ class Challenges extends PureComponent {
             .deleteChallenge(challengeId,daysId)
             .then(() => {
                 const challenges = this.state.challenges.filter(challenge => challenge.id !== challengeId );
-                console.log('## 삭제 후 challenges ##');
-                console.log(challenges);
                 this.setState({challenges});
             })
             .catch(error => console.log('error', error));
@@ -70,13 +66,10 @@ class Challenges extends PureComponent {
             .then((result) => {
                 const updatedChallenges = this.state.challenges.map((challenge) => (
                     challenge.id === result.id ? result : challenge));
-                console.log('## 타이틀 수정후 challenges ##');
-                console.log(updatedChallenges);
                 this.setState({challenges: updatedChallenges});
             })
             .catch((error) => {
                 const text = error.message.toString();
-                console.log(text);
                 this.handlModalOpen(text);
             });
     }
@@ -84,27 +77,17 @@ class Challenges extends PureComponent {
     handleNumber = (challenge,daysInfo,isChecked,number) => {
         const chId = challenge.id;
         const daysId = daysInfo.id;
-        console.log(`
-        daysInfo : ${daysInfo}
-        daysId : ${daysId}
-        chId : ${chId}
-        isChecked : ${isChecked}
-        number : ${number}
-        `);
         this.challengeService
             .updateChallengeNumber(daysId, number, isChecked,chId)
             .then((result) => {
                 const updatedChallenges = this.state.challenges.map((challenge) => (
                     challenge.id === result.id ? result : challenge));
-                console.log('## 숫자 클릭후 challenges ##');
-                console.log(updatedChallenges);
                 this.setState({challenges: updatedChallenges});
             })
             .catch(error => console.log('error', error));
     }
 
     render() {
-        console.log('[ Challenges ] Render!');
         return (
         <>
         {this.props.user && (

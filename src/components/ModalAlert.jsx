@@ -1,7 +1,6 @@
 import React from 'react';
 
 function ModalAlert({text, isAlert,onClose}) {
-  console.log('[ ModalAlert ] Render');
   return (
     <>
     { text && (

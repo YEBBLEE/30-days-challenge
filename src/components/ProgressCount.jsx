@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 
 class ProgressCount extends PureComponent {
     render() {
-    console.log('[ ProgressCount ] Render');
         return (
             <nav className='navbar'>
                 <h1 className='navbar-title'>30 DAYS CHALLANGE</h1>

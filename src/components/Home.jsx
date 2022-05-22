@@ -4,7 +4,6 @@ import Footer from './Footer';
 import { Link } from 'react-router-dom';
 
 function Home() {
-  console.log(`[Home] Render!`);
   return (
     <>
       <Logo/>
