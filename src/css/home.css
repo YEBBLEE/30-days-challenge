@@ -39,7 +39,7 @@
   color: var(--color-light-blue);
   animation: rubberband 500ms alternate ease-out;
 }
-span {
+.footer-container span {
   color: var(--color-white);
   margin-bottom: 8px;
   font-size: 1rem;
